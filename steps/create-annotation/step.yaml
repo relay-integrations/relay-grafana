@@ -1,0 +1,90 @@
+# Step metadata - full description at:
+# https://github.com/puppetlabs/relay-rfcs/blob/master/content/0006-integration-layout/rfc.md#common-metadata
+apiVersion: integration/v1
+kind: Step
+name: create-annotation
+version: 1
+summary: Post an annotation to a Grafana dashboard
+
+description: |
+  Annotate a dashboard with an event from a Relay workflow.
+  If the panelId and dashboardId are omitted, the annotation
+  will be global. Note this does not yet support region
+  (timespan) annotations; the timestamp will be the time
+  at which the workflow runs.
+
+build:
+  apiVersion: build/v1
+  kind: Docker
+
+publish:
+  repository: relaysh/grafana-step-create-annotation
+
+# optional list of examples; each one can be a Step or a complete Workflow
+examples:
+- summary: Post an annotation with a given message 
+  apiVersion: v1
+  kind: Workflow
+  parameters:
+    text:
+      description: The content to post 
+      default: A Relay workflow did something cool.
+    dashboardId:
+      description: The optional numeric ID of the dashboard to update
+      default: 0
+    panelId:
+      description: The optional numeric ID of the panel to annotate
+      default: 0
+    tags:
+      description: Optional tags to add on the annotation
+      default: relay
+  steps:
+    image: relaysh/grafana-step-create-annotation
+    spec:
+      text: !Parameter text
+      dashboardId: !Parameter dashboardId
+      panelId: !Parameter panelId
+      tags: !Parameter tags
+
+schemas:
+  spec:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    properties:
+      connection:
+        type: object
+        x-relay-connectionType: grafana
+        description: A connection containing a Grafana API token
+        properties:
+          apiToken:
+            type: string
+            description: A Grafana API token
+        required:
+        - apiToken
+      text:
+        type: string
+        description: The text of the annotation
+      dashboardId:
+        type: string
+        description: The optional numeric ID of the dashboard to update 
+      panelId:
+        type: string
+        description: The optional numeric ID of the dashboard panel to annotate
+      tags:
+        type: array
+        items: string
+        description: Optional tags to add on the annotation 
+    required:
+    - connection
+    - text
+
+outputs:
+  $schema: http://json-schema.org/draft-07/schema#
+  type: object
+  properties:
+    resultCode:
+      type: string
+      description: The numeric HTTP code received from the Grafana API
+    resultText:
+      type: string
+      description: The text message received from the Grafana API response

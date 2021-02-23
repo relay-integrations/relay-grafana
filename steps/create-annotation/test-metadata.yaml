@@ -1,0 +1,21 @@
+ connections:
+   grafana/test:
+     apiURL: http://localhost:3000/api
+     apiKey: Y2FjaGVzIHJ1aW4gZXZlcnl0aGluZyBhcm91bmQgbWUK
+
+ runs:
+   '1':
+     steps:
+      annotate-global-notags:
+        spec:
+          connection: !Connection [grafana, test]
+          text: Test message from metadata
+          dashboardID: 0
+          panelID: 0
+      annotate-panel-tagged:
+        spec:
+          connection: !Connection [grafana, test]
+          text: Test message from metadata
+          dashboardID: 512
+          panelID: 7
+          tags: [relay, test]
