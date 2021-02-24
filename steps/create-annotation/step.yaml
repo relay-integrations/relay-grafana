@@ -29,21 +29,23 @@ examples:
     text:
       description: The content to post 
       default: A Relay workflow did something cool.
-    dashboardId:
+    dashboardID:
       description: The optional numeric ID of the dashboard to update
       default: 0
-    panelId:
+    panelID:
       description: The optional numeric ID of the panel to annotate
       default: 0
     tags:
       description: Optional tags to add on the annotation
       default: relay
   steps:
+  - name: annotate-dashboard
     image: relaysh/grafana-step-create-annotation
     spec:
+      connection: !Connection [grafana,my-grafana-connection]
       text: !Parameter text
-      dashboardId: !Parameter dashboardId
-      panelId: !Parameter panelId
+      dashboardID: !Parameter dashboardID
+      panelID: !Parameter panelID
       tags: !Parameter tags
 
 schemas:

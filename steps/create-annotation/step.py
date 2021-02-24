@@ -15,16 +15,18 @@ payload = {
 
 # these should default to a false-y 0 if not overridden by user
 if relay.get(D.dashboardID):
-  payload['dashboardID'] = relay.get(D.dashboardID)
+  payload['dashboardID'] = int(relay.get(D.dashboardID))
 
 if relay.get(D.panelID):
-  payload['panelID'] = relay.get(D.panelID)
+  payload['panelID'] = int(relay.get(D.panelID))
 
 try:
   labels = relay.get(D.labels)
   payload['labels'] = labels
 except requests.exceptions.HTTPError:
   pass
+
+print("Posting payload: ", payload)
 
 r = requests.post(
   apiURL + '/annotations',
