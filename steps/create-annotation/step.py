@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # posts an event to datadog from relay
 
-import requests, os
+import requests, os, time
 from relay_sdk import Interface, Dynamic as D
 
 relay = Interface()
@@ -11,6 +11,7 @@ apiKey = relay.get(D.connection.apiKey)
 
 payload = {
   'text': relay.get(D.text),
+  'time': round(time.time() * 1000)
 }
 
 # these should default to a false-y 0 if not overridden by user
