@@ -23,30 +23,31 @@ publish:
 # optional list of examples; each one can be a Step or a complete Workflow
 examples:
 - summary: Post an annotation with a given message 
-  apiVersion: v1
-  kind: Workflow
-  parameters:
-    text:
-      description: The content to post 
-      default: A Relay workflow did something cool.
-    dashboardID:
-      description: The optional numeric ID of the dashboard to update
-      default: 0
-    panelID:
-      description: The optional numeric ID of the panel to annotate
-      default: 0
-    tags:
-      description: Optional tags to add on the annotation
-      default: relay
-  steps:
-  - name: annotate-dashboard
-    image: relaysh/grafana-step-create-annotation
-    spec:
-      connection: !Connection [grafana,my-grafana-connection]
-      text: !Parameter text
-      dashboardID: !Parameter dashboardID
-      panelID: !Parameter panelID
-      tags: !Parameter tags
+  content:
+    apiVersion: v1
+    kind: Workflow
+    parameters:
+      text:
+        description: The content to post 
+        default: A Relay workflow did something cool.
+      dashboardID:
+        description: The optional numeric ID of the dashboard to update
+        default: 0
+      panelID:
+        description: The optional numeric ID of the panel to annotate
+        default: 0
+      tags:
+        description: Optional tags to add on the annotation
+        default: relay
+    steps:
+    - name: annotate-dashboard
+      image: relaysh/grafana-step-create-annotation
+      spec:
+        connection: !Connection [grafana,my-grafana-connection]
+        text: !Parameter text
+        dashboardID: !Parameter dashboardID
+        panelID: !Parameter panelID
+        tags: !Parameter tags
 
 schemas:
   spec:
