@@ -75,7 +75,8 @@ schemas:
         description: The optional numeric ID of the dashboard panel to annotate
       tags:
         type: array
-        items: string
+        items:
+          type: string
         description: Optional tags to add on the annotation 
     required:
     - connection
