@@ -3,7 +3,7 @@ kind: Integration
 name: relay-grafana
 channel: stable
 version: v20200514
-summary: Integration between Relay.sh and Grafana
+summary: Grafana
 license: Apache-2.0
 homepage: https://github.com/relay-integrations/relay-grafana
 source: https://github.com/relay-integrations/relay-grafana
