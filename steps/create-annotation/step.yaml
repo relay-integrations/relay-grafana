@@ -8,10 +8,6 @@ summary: Post an annotation to a Grafana dashboard
 
 description: |
   Annotate a dashboard with an event from a Relay workflow.
-  If the panelId and dashboardId are omitted, the annotation
-  will be global. Note this does not yet support region
-  (timespan) annotations; the timestamp will be the time
-  at which the workflow runs.
 
 build:
   apiVersion: build/v1
