@@ -14,16 +14,21 @@ payload = {
   'time': round(time.time() * 1000)
 }
 
-# these should default to a false-y 0 if not overridden by user
-if relay.get(D.dashboardID):
-  payload['dashboardID'] = int(relay.get(D.dashboardID))
-
-if relay.get(D.panelID):
-  payload['panelID'] = int(relay.get(D.panelID))
+try:
+  dashboardID = int(relay.get(D.dashboardID))
+  payload['dashboardID'] = dashboardID
+except requests.exceptions.HTTPError:
+  pass
 
 try:
-  labels = relay.get(D.labels)
-  payload['labels'] = labels
+  panelID = int(relay.get(D.panelID))
+  payload["panelID"] = panelID
+except requests.exceptions.HTTPError:
+  pass
+
+try:
+  tags = relay.get(D.tags)
+  payload['tags'] = tags
 except requests.exceptions.HTTPError:
   pass
 
