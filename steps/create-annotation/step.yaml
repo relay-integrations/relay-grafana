@@ -63,10 +63,10 @@ schemas:
       text:
         type: string
         description: The text of the annotation
-      dashboardId:
+      dashboardID:
         type: string
         description: The optional numeric ID of the dashboard to update 
-      panelId:
+      panelID:
         type: string
         description: The optional numeric ID of the dashboard panel to annotate
       tags:
