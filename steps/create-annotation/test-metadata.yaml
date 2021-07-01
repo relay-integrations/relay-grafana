@@ -8,14 +8,12 @@
      steps:
       annotate-global-notags:
         spec:
-          connection: !Connection [grafana, test]
+          connection: ${connections.grafana.test}
           text: Test message from metadata
-          dashboardID: 0
-          panelID: 0
       annotate-panel-tagged:
         spec:
-          connection: !Connection [grafana, test]
+          connection: ${connections.grafana.test}
           text: Test message from metadata
-          dashboardID: 512
+          dashboardId: 512
           panelID: 7
           tags: [relay, test]

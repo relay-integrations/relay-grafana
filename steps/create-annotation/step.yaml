@@ -16,20 +16,19 @@ build:
 publish:
   repository: relaysh/grafana-step-create-annotation
 
-# optional list of examples; each one can be a Step or a complete Workflow
 examples:
-- summary: Post an annotation with a given message 
+- summary: Post an annotation with a given message
   content:
     apiVersion: v1
     kind: Workflow
     parameters:
       text:
-        description: The content to post 
-        default: A Relay workflow did something cool.
-      dashboardID:
+        description: The content to post
+        default: An event of interest occurred.
+      dashboardId:
         description: The optional numeric ID of the dashboard to update
         default: 0
-      panelID:
+      panelId:
         description: The optional numeric ID of the panel to annotate
         default: 0
       tags:
@@ -39,11 +38,11 @@ examples:
     - name: annotate-dashboard
       image: relaysh/grafana-step-create-annotation
       spec:
-        connection: !Connection [grafana,my-grafana-connection]
-        text: !Parameter text
-        dashboardID: !Parameter dashboardID
-        panelID: !Parameter panelID
-        tags: !Parameter tags
+        connection: ${connections.grafana.my-grafana-connection}
+        text: ${parameters.text}
+        dashboardId: ${parameters.dashboardId}
+        panelId: ${parameters.panelId}
+        tags: ${parameters.tags}
 
 schemas:
   spec:
@@ -53,27 +52,40 @@ schemas:
       connection:
         type: object
         x-relay-connectionType: grafana
-        description: A connection containing a Grafana API token
+        description: Grafana connection data
         properties:
+          apiURL:
+            type: string
+            description: The Grafana URL to connect to
           apiToken:
             type: string
             description: A Grafana API token
         required:
+        - apiURL
         - apiToken
-      text:
-        type: string
-        description: The text of the annotation
-      dashboardID:
-        type: string
-        description: The optional numeric ID of the dashboard to update 
-      panelID:
-        type: string
+      dashboardId:
+        type: integer
+        description: The optional numeric ID of the dashboard to update
+      panelId:
+        type: integer
         description: The optional numeric ID of the dashboard panel to annotate
       tags:
         type: array
         items:
           type: string
-        description: Optional tags to add on the annotation 
+        description: Optional tags to add on the annotation
+      text:
+        type: string
+        description: The text of the annotation
+      time:
+        type: object
+        properties:
+          start:
+            type: integer
+            description: Start time as an epoch number with millisecond resolution
+          end:
+            type: integer
+            description: End time as an epoch number with millisecond resolution
     required:
     - connection
     - text
@@ -83,7 +95,7 @@ outputs:
   type: object
   properties:
     resultCode:
-      type: string
+      type: integer
       description: The numeric HTTP code received from the Grafana API
     resultText:
       type: string
