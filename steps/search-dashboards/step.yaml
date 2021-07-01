@@ -1,0 +1,58 @@
+# Step metadata - full description at:
+# https://github.com/puppetlabs/relay-rfcs/blob/master/content/0006-integration-layout/rfc.md#common-metadata
+apiVersion: integration/v1
+kind: Step
+name: search-dashboards
+version: 1
+summary: Search Grafana dashboards
+
+description: |
+  Allows searching for Grafana dashboards
+
+build:
+  apiVersion: build/v1
+  kind: Docker
+
+publish:
+  repository: relaysh/grafana-step-search-dashboards
+
+examples:
+- summary: Search for Grafana dashboards
+  content:
+    apiVersion: v1
+    kind: Workflow
+    parameters:
+      tag:
+        description: Optional tag to filter by
+        default: relay
+    steps:
+    - name: search-dashboards
+      image: relaysh/grafana-step-create-annotation
+      spec:
+        connection: ${connections.grafana.my-grafana-connection}
+        tag: ${parameters.tag}
+
+schemas:
+  spec:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    properties:
+      connection:
+        type: object
+        x-relay-connectionType: grafana
+        description: Grafana connection data
+        properties:
+          apiURL:
+            type: string
+            description: The Grafana URL to connect to
+          apiToken:
+            type: string
+            description: A Grafana API token
+        required:
+        - apiURL
+        - apiToken
+      tag:
+        type: string
+        description: Optional tag to filter by
+    required:
+    - connection
