@@ -15,5 +15,5 @@
           connection: ${connections.grafana.test}
           text: Test message from metadata
           dashboardId: 512
-          panelID: 7
+          panelId: 7
           tags: [relay, test]

@@ -27,7 +27,7 @@ examples:
         default: relay
     steps:
     - name: search-dashboards
-      image: relaysh/grafana-step-create-annotation
+      image: relaysh/grafana-step-search-dashboards
       spec:
         connection: ${connections.grafana.my-grafana-connection}
         tag: ${parameters.tag}

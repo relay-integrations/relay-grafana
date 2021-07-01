@@ -26,10 +26,10 @@ examples:
         description: The content to post
         default: An event of interest occurred.
       dashboardId:
-        description: The optional numeric ID of the dashboard to update
+        description: The optional numeric identifier of the dashboard to update
         default: 0
       panelId:
-        description: The optional numeric ID of the panel to annotate
+        description: The optional numeric identifier of the panel to annotate
         default: 0
     steps:
     - name: annotate-dashboard
