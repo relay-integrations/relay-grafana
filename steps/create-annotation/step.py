@@ -10,8 +10,7 @@ relay = Interface()
 apiURL = relay.get(D.connection.apiURL)
 apiKey = relay.get(D.connection.apiKey)
 
-timeNow = round(time.time() * 1000)
-timeStart = timeNow
+timeStart = round(time.time() * 1000)
 try:
     timeStart = int(relay.get(D.time.start))
 except requests.exceptions.HTTPError:
@@ -25,9 +24,6 @@ except requests.exceptions.HTTPError:
 
 if timeEnd < timeStart:
     timeEnd = timeStart
-
-if timeEnd > timeNow:
-    timeEnd = timeNow
 
 payload = {
     'text': relay.get(D.text),

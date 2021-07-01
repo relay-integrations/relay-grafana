@@ -31,9 +31,6 @@ examples:
       panelId:
         description: The optional numeric ID of the panel to annotate
         default: 0
-      tags:
-        description: Optional tags to add on the annotation
-        default: relay
     steps:
     - name: annotate-dashboard
       image: relaysh/grafana-step-create-annotation
@@ -42,7 +39,7 @@ examples:
         text: ${parameters.text}
         dashboardId: ${parameters.dashboardId}
         panelId: ${parameters.panelId}
-        tags: ${parameters.tags}
+        tags: [relay]
 
 schemas:
   spec:
@@ -65,15 +62,15 @@ schemas:
         - apiToken
       dashboardId:
         type: integer
-        description: The optional numeric ID of the dashboard to update
+        description: The optional numeric identifier of the dashboard to update
       panelId:
         type: integer
-        description: The optional numeric ID of the dashboard panel to annotate
+        description: The optional numeric identifier of the dashboard panel to annotate
       tags:
         type: array
         items:
           type: string
-        description: Optional tags to add on the annotation
+        description: Optional tags to add to the annotation
       text:
         type: string
         description: The text of the annotation
