@@ -11,12 +11,12 @@ apiURL = relay.get(D.connection.apiURL)
 apiKey = relay.get(D.connection.apiKey)
 
 params = {
-    'type': 'dash_db'
+    'type': 'dash-db'
 }
 
 try:
-    tag = relay.get(D.tag)
-    params['tag'] = tag
+    tags = relay.get(D.tags)
+    params['tag'] = tags
 except requests.exceptions.HTTPError:
     pass
 
@@ -29,5 +29,7 @@ r = requests.get(
 )
 
 print('Emitted event to Grafana API, got response: ', r.text)
+
+relay.outputs.set('response', r.json())
 
 r.raise_for_status()

@@ -19,4 +19,6 @@ r = requests.get(
 
 print('Emitted event to Grafana API, got response: ', r.text)
 
+relay.outputs.set('response', r.json())
+
 r.raise_for_status()

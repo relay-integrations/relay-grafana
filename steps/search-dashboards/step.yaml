@@ -21,16 +21,14 @@ examples:
   content:
     apiVersion: v1
     kind: Workflow
-    parameters:
-      tag:
-        description: Optional tag to filter by
-        default: relay
     steps:
     - name: search-dashboards
       image: relaysh/grafana-step-search-dashboards
       spec:
         connection: ${connections.grafana.my-grafana-connection}
-        tag: ${parameters.tag}
+        tags:
+        - prod
+        - services
 
 schemas:
   spec:

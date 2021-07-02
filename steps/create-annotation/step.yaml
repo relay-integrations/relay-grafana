@@ -7,7 +7,7 @@ version: 1
 summary: Post an annotation to a Grafana dashboard
 
 description: |
-  Annotate a dashboard with an event from a Relay workflow.
+  Annotate a Grafana dashboard with an event.
 
 build:
   apiVersion: build/v1
@@ -27,10 +27,8 @@ examples:
         default: An event of interest occurred.
       dashboardId:
         description: The optional numeric identifier of the dashboard to update
-        default: 0
       panelId:
         description: The optional numeric identifier of the panel to annotate
-        default: 0
     steps:
     - name: annotate-dashboard
       image: relaysh/grafana-step-create-annotation

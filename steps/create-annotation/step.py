@@ -32,14 +32,16 @@ payload = {
 }
 
 try:
-    dashboardId = int(relay.get(D.dashboardId))
-    payload['dashboardId'] = dashboardId
+    dashboardId = relay.get(D.dashboardId)
+    if dashboardId is not None:
+        payload['dashboardId'] = int(dashboardId)
 except requests.exceptions.HTTPError:
     pass
 
 try:
-    panelId = int(relay.get(D.panelId))
-    payload["panelId"] = panelId
+    panelId = relay.get(D.panelId)
+    if panelId is not None:
+        payload["panelId"] = int(panelId)
 except requests.exceptions.HTTPError:
     pass
 
