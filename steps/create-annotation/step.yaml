@@ -23,8 +23,8 @@ examples:
     kind: Workflow
     parameters:
       text:
-        description: The content to post
-        default: An event of interest occurred.
+        description: The annotation message
+        default: Production deployment
       dashboardId:
         description: The optional numeric identifier of the dashboard to update
       panelId:
@@ -37,7 +37,7 @@ examples:
         text: ${parameters.text}
         dashboardId: ${parameters.dashboardId}
         panelId: ${parameters.panelId}
-        tags: [relay]
+        tags: [deploy, prod]
 
 schemas:
   spec:
