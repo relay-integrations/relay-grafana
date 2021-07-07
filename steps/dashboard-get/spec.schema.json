@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "connection": {
+            "type": "object",
+            "x-relay-connectionType": "grafana",
+            "description": "Grafana connection data",
+            "properties": {
+                "apiURL": {
+                    "type": "string",
+                    "description": "The Grafana URL to connect to"
+                },
+                "apiToken": {
+                    "type": "string",
+                    "description": "A Grafana API token"
+                }
+            },
+            "required": [
+                "apiURL",
+                "apiToken"
+            ]
+        },
+        "uid": {
+            "type": "string",
+            "description": "The unique identifier (uid) of a dashboard"
+        }
+    },
+    "required": [
+        "connection",
+        "uid"
+    ]
+}

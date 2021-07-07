@@ -1,5 +1,3 @@
-# Step metadata - full description at:
-# https://github.com/puppetlabs/relay-rfcs/blob/master/content/0006-integration-layout/rfc.md#common-metadata
 apiVersion: integration/v1
 kind: Step
 name: dashboard-get
@@ -33,34 +31,8 @@ examples:
 
 schemas:
   spec:
-    $schema: http://json-schema.org/draft-07/schema#
-    type: object
-    properties:
-      connection:
-        type: object
-        x-relay-connectionType: grafana
-        description: Grafana connection data
-        properties:
-          apiURL:
-            type: string
-            description: The Grafana URL to connect to
-          apiToken:
-            type: string
-            description: A Grafana API token
-        required:
-        - apiURL
-        - apiToken
-      uid:
-        type: string
-        description: The unique identifier (uid) of a dashboard
-    required:
-    - connection
-    - uid
-
+    source: file
+    file: spec.schema.json
   outputs:
-    $schema: http://json-schema.org/draft-07/schema#
-    type: object
-    properties:
-      response:
-        type: object
-        description: The response from the Grafana API
+    source: file
+    file: outputs.schema.json

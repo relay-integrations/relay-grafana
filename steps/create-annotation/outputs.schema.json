@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "resultCode": {
+            "type": "integer",
+            "description": "The numeric HTTP code received from the Grafana API"
+        },
+        "resultText": {
+            "type": "string",
+            "description": "The text message received from the Grafana API response"
+        }
+    }
+}
