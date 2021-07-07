@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "connection": {
+            "type": "object",
+            "x-relay-connectionType": "grafana",
+            "description": "Grafana connection data",
+            "properties": {
+                "apiURL": {
+                    "type": "string",
+                    "description": "The Grafana URL to connect to"
+                },
+                "apiToken": {
+                    "type": "string",
+                    "description": "A Grafana API token"
+                }
+            },
+            "required": [
+                "apiURL",
+                "apiToken"
+            ]
+        },
+        "dashboardId": {
+            "type": "integer",
+            "description": "The numeric identifier of the dashboard to update"
+        },
+        "panelId": {
+            "type": "integer",
+            "description": "The numeric identifier of the dashboard panel to annotate"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Tags to add to the annotation"
+        },
+        "text": {
+            "type": "string",
+            "description": "The text of the annotation"
+        },
+        "time": {
+            "type": "object",
+            "properties": {
+                "start": {
+                    "type": "integer",
+                    "description": "Start time as an epoch number with millisecond resolution"
+                },
+                "end": {
+                    "type": "integer",
+                    "description": "End time as an epoch number with millisecond resolution"
+                }
+            }
+        }
+    },
+    "required": [
+        "connection",
+        "text"
+    ]
+}

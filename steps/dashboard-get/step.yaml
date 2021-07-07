@@ -1,0 +1,38 @@
+apiVersion: integration/v1
+kind: Step
+name: dashboard-get
+version: 1
+summary: Retrieve data for a specific Grafana Dashboard
+
+description: |
+  This step retrieves data for a Grafana dashboard
+
+build:
+  apiVersion: build/v1
+  kind: Docker
+
+publish:
+  repository: relaysh/grafana-step-dashboard-get
+
+examples:
+- summary: Retrieve a Grafana dashboard
+  content:
+    apiVersion: v1
+    kind: Workflow
+    parameters:
+      uid:
+        description: The unique identifier (uid) of a dashboard
+    steps:
+    - name: dashboard-get
+      image: relaysh/grafana-step-dashboard-get
+      spec:
+        connection: ${connections.grafana.my-grafana-connection}
+        uid: ${parameters.uid}
+
+schemas:
+  spec:
+    source: file
+    file: spec.schema.json
+  outputs:
+    source: file
+    file: outputs.schema.json

@@ -1,0 +1,37 @@
+apiVersion: integration/v1
+kind: Step
+name: dashboard-search
+version: 1
+summary: Search Grafana dashboards
+
+description: |
+  Allows searching for Grafana dashboards
+
+build:
+  apiVersion: build/v1
+  kind: Docker
+
+publish:
+  repository: relaysh/grafana-step-dashboard-search
+
+examples:
+- summary: Search for Grafana dashboards
+  content:
+    apiVersion: v1
+    kind: Workflow
+    steps:
+    - name: dashboard-search
+      image: relaysh/grafana-step-dashboard-search
+      spec:
+        connection: ${connections.grafana.my-grafana-connection}
+        tags:
+        - prod
+        - services
+
+schemas:
+  spec:
+    source: file
+    file: spec.schema.json
+  outputs:
+    source: file
+    file: outputs.schema.json

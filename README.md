@@ -6,7 +6,9 @@ This integration allows you to connect Grafana to Relay.
 
 | Name | Description |
 |------|-------------|
-| [grafana-step-create-annotation](steps/create-annotation) | This steps posts an annotation to a Grafana dashboard | 
+| [grafana-step-create-annotation](steps/create-annotation) | This steps posts an annotation to a Grafana dashboard |
+| [grafana-step-dashboard-get](steps/dashboard-get) | This step retrieves data for a Grafana dashboard |
+| [grafana-step-dashboard-search](steps/dashboard-search) | Allows searching for Grafana dashboards |
 
 ## Contributing
 
