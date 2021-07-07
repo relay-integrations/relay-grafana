@@ -51,16 +51,16 @@ schemas:
         - apiURL
         - apiToken
       uid:
-        type: uid
+        type: string
         description: The unique identifier (uid) of a dashboard
     required:
     - connection
     - uid
 
-outputs:
-  $schema: http://json-schema.org/draft-07/schema#
-  type: object
-  properties:
-    response:
-      type: object
-      description: The response from the Grafana API
+  outputs:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    properties:
+      response:
+        type: object
+        description: The response from the Grafana API

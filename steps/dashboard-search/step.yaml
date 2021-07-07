@@ -49,16 +49,18 @@ schemas:
         required:
         - apiURL
         - apiToken
-      tag:
-        type: string
-        description: Optional tag to filter by
+      tags:
+        type: array
+        items:
+          type: string
+        description: Optional tags to filter by
     required:
     - connection
 
-outputs:
-  $schema: http://json-schema.org/draft-07/schema#
-  type: object
-  properties:
-    response:
-      type: object
-      description: The response from the Grafana API
+  outputs:
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    properties:
+      response:
+        type: object
+        description: The response from the Grafana API
