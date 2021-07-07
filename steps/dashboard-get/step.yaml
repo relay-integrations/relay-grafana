@@ -2,33 +2,34 @@
 # https://github.com/puppetlabs/relay-rfcs/blob/master/content/0006-integration-layout/rfc.md#common-metadata
 apiVersion: integration/v1
 kind: Step
-name: search-dashboards
+name: dashboard-get
 version: 1
-summary: Search Grafana dashboards
+summary: Retrieve data for a specific Grafana Dashboard
 
 description: |
-  Allows searching for Grafana dashboards
+  This step retrieves data for a Grafana dashboard
 
 build:
   apiVersion: build/v1
   kind: Docker
 
 publish:
-  repository: relaysh/grafana-step-search-dashboards
+  repository: relaysh/grafana-step-dashboard-get
 
 examples:
-- summary: Search for Grafana dashboards
+- summary: Retrieve a Grafana dashboard
   content:
     apiVersion: v1
     kind: Workflow
+    parameters:
+      uid:
+        description: The unique identifier (uid) of a dashboard
     steps:
-    - name: search-dashboards
-      image: relaysh/grafana-step-search-dashboards
+    - name: dashboard-get
+      image: relaysh/grafana-step-dashboard-get
       spec:
         connection: ${connections.grafana.my-grafana-connection}
-        tags:
-        - prod
-        - services
+        uid: ${parameters.uid}
 
 schemas:
   spec:
@@ -49,11 +50,12 @@ schemas:
         required:
         - apiURL
         - apiToken
-      tag:
-        type: string
-        description: Optional tag to filter by
+      uid:
+        type: uid
+        description: The unique identifier (uid) of a dashboard
     required:
     - connection
+    - uid
 
 outputs:
   $schema: http://json-schema.org/draft-07/schema#
